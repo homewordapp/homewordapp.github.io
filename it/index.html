@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homeword – Trascrivere audio e video in testo, gratis e sul tuo PC</title>
+<meta name="description" content="Sbobinare registrazioni, trascrivere audio e video in testo, fare sottotitoli, verbali e riassunti di riunioni direttamente sul tuo PC Windows. I file non lasciano mai il computer. Gratis, senza account e senza abbonamento.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/png" href="../img/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Homeword – Le tue parole restano a casa">
+<meta property="og:description" content="Trascrivi, sottotitola, traduci e riassumi audio e video sul tuo PC Windows. Niente viene caricato online.">
+<meta property="og:image" content="https://homewordapp.github.io/img/social-card.png">
+<meta property="og:url" content="https://homewordapp.github.io/it/">
+<meta property="og:locale" content="it_IT">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@homewordapp">
+<link rel="alternate" hreflang="en" href="https://homewordapp.github.io/">
+<link rel="alternate" hreflang="it" href="https://homewordapp.github.io/it/">
+<link rel="alternate" hreflang="x-default" href="https://homewordapp.github.io/">
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --surface: #ffffff;
+    --text: #141a2b;
+    --muted: #5a6275;
+    --line: #e3e6ef;
+    --brand: #2563eb;
+    --brand-strong: #1d4ed8;
+    --brand-soft: #e8efff;
+    --hero-from: #1e3fa8;
+    --hero-to: #2f6bea;
+    --radius: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1320;
+      --surface: #171c2c;
+      --text: #eef1f8;
+      --muted: #a3abbf;
+      --line: #283048;
+      --brand: #5b8cff;
+      --brand-strong: #7aa2ff;
+      --brand-soft: #1d2a4d;
+      --hero-from: #16286b;
+      --hero-to: #2350b8;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  a { color: var(--brand); }
+  img { max-width: 100%; height: auto; display: block; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  header.top {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  header.top .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 19px; }
+  .brand img { width: 32px; height: 32px; border-radius: 8px; }
+  nav.links { display: flex; gap: 20px; margin-left: auto; }
+  nav.links a { color: var(--muted); text-decoration: none; font-size: 15px; }
+  nav.links a:hover { color: var(--text); }
+  @media (max-width: 720px) { nav.links { display: none; } header.top .btn { margin-left: auto; } }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 20px; border-radius: 10px;
+    font-weight: 600; font-size: 16px; text-decoration: none;
+    border: 1px solid transparent; transition: transform .1s, background .15s;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--brand); color: #fff; }
+  .btn-primary:hover { background: var(--brand-strong); }
+  .btn-light { background: #fff; color: #1d3fa6; }
+  .btn-light:hover { background: #eef3ff; }
+  .btn-ghost { color: #fff; border-color: rgba(255,255,255,.45); }
+  .btn-ghost:hover { background: rgba(255,255,255,.1); }
+  .btn-small { padding: 8px 14px; font-size: 14px; white-space: nowrap; }
+  @media (max-width: 360px) { header.top .btn-small { display: none; } }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(120deg, var(--hero-from), var(--hero-to));
+    color: #fff;
+    padding: 72px 0 0;
+    overflow: hidden;
+  }
+  .hero h1 { font-size: clamp(40px, 6vw, 64px); line-height: 1.05; margin: 0 0 18px; letter-spacing: -0.02em; }
+  .hero p.lead { font-size: clamp(18px, 2.2vw, 21px); max-width: 640px; margin: 0 0 30px; color: rgba(255,255,255,.9); }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+  .hero .facts { font-size: 15px; color: rgba(255,255,255,.8); margin: 0 0 48px; }
+  .hero .shot {
+    border-radius: 14px 14px 0 0;
+    box-shadow: 0 -10px 50px rgba(0,0,0,.25);
+    border: 1px solid rgba(255,255,255,.25); border-bottom: 0;
+    margin: 0 auto; max-width: 980px; overflow: hidden;
+  }
+
+  /* Sections */
+  section { padding: 80px 0; }
+  section h2 { font-size: clamp(28px, 3.5vw, 38px); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.01em; }
+  section p.intro { color: var(--muted); max-width: 680px; margin: 0 0 40px; font-size: 18px; }
+
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px;
+  }
+  .card .ico {
+    width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center;
+    background: var(--brand-soft); color: var(--brand); margin-bottom: 14px;
+  }
+  .card .ico svg { width: 22px; height: 22px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  .steps { counter-reset: step; display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .step { position: relative; padding-left: 56px; }
+  .step::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%;
+    background: var(--brand); color: #fff; font-weight: 700; display: grid; place-items: center;
+  }
+  .step h3 { margin: 6px 0 4px; font-size: 18px; }
+  .step p { margin: 0; color: var(--muted); }
+
+  .gallery { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .gallery figure { margin: 0; }
+  .gallery .frame { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 8px 30px rgba(20,30,60,.08); }
+  .gallery figcaption { color: var(--muted); font-size: 15px; margin-top: 10px; }
+
+  .privacy { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .two { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .checks { list-style: none; padding: 0; margin: 0; }
+  .checks li { position: relative; padding-left: 32px; margin-bottom: 12px; }
+  .checks li::before {
+    content: ""; position: absolute; left: 0; top: 4px; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--brand-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat;
+  }
+  .note { color: var(--muted); font-size: 15.5px; }
+
+  table.req { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; font-size: 15.5px; }
+  table.req th, table.req td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.req tr:last-child td { border-bottom: 0; }
+  table.req th { background: var(--brand-soft); font-weight: 600; }
+  .table-scroll { overflow-x: auto; }
+
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; }
+  details summary { cursor: pointer; font-weight: 600; }
+  details p { margin: 10px 0 0; color: var(--muted); }
+
+  .final { text-align: center; background: linear-gradient(120deg, var(--hero-from), var(--hero-to)); color: #fff; }
+  .final h2 { color: #fff; }
+  .final p { color: rgba(255,255,255,.9); margin: 0 0 28px; }
+  .final .ctas { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+  footer { padding: 40px 0; color: var(--muted); font-size: 14.5px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; }
+  footer nav { display: flex; flex-wrap: wrap; gap: 18px; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="../img/logo.png" alt="" width="32" height="32">Homeword</a>
+    <nav class="links">
+      <a href="#features">Funzioni</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#requirements">Requisiti</a>
+      <a href="#faq">Domande</a>
+      <a href="../" lang="en" hreflang="en">English</a>
+    </nav>
+    <a class="btn btn-primary btn-small" href="#download">Scarica Homeword</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero" id="download">
+    <div class="wrap">
+      <h1>Le tue parole restano a casa.</h1>
+      <p class="lead">Trasforma riunioni, interviste, lezioni e video in testo, sottotitoli e riassunti, direttamente sul tuo PC Windows. Sbobinare una registrazione non è mai stato così semplice. Niente viene caricato online, niente account, niente abbonamento.</p>
+      <div class="ctas">
+        <a class="btn btn-light" href="https://apps.microsoft.com/detail/9PH4PXP30PCT">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#f25022" d="M3 3h8.5v8.5H3z"/><path fill="#7fba00" d="M12.5 3H21v8.5h-8.5z"/><path fill="#00a4ef" d="M3 12.5h8.5V21H3z"/><path fill="#ffb900" d="M12.5 12.5H21V21h-8.5z"/></svg>
+          Scaricalo dal Microsoft Store
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/homewordapp/Homeword-Releases/releases/latest">Scarica l'installer</a>
+      </div>
+      <p class="facts">Gratis · Windows 10 e 11 · Interfaccia in italiano e inglese</p>
+      <div class="shot">
+        <picture>
+          <source srcset="../img/it-3-results-dark.png" media="(prefers-color-scheme: dark)">
+          <img src="../img/it-3-results-light.png" width="2049" height="1152" alt="Homeword con una trascrizione finita: testo, sottotitoli, traduzioni, riassunto e i nomi di chi parla">
+        </picture>
+      </div>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <h2>Tutto quello che serve per trasformare la voce in testo</h2>
+      <p class="intro">Trascini una registrazione e ottieni il testo, i sottotitoli e, se vuoi, la traduzione e il riassunto. Riconosce anche chi sta parlando.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h4"/></svg></div>
+          <h3>Trascrivere</h3>
+          <p>File audio e video, anche più insieme o una cartella intera. Testo in paragrafi, Word, PDF o Markdown.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg></div>
+          <h3>Registrare riunioni e chiamate</h3>
+          <p>La tua voce e quello che suona il PC (Teams, Zoom, Meet), con il testo che compare in diretta.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 15h4M13 15h5M6 11h8"/></svg></div>
+          <h3>Sottotitoli automatici</h3>
+          <p>File .srt e .vtt pronti da usare, già divisi in righe leggibili e ben sincronizzate.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.5a5 5 0 0 1 5 5"/></svg></div>
+          <h3>Chi parla</h3>
+          <p>"Persona 1", "Persona 2"… poi scrivi i nomi veri e compaiono in tutti i file.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h8M8 3v2M6 5c0 4 3 7 6 8M10 5c0 4-3 7-6 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/></svg></div>
+          <h3>Tradurre</h3>
+          <p>In 42 lingue, anche questo sul tuo PC. Anche dopo, dalla schermata dei risultati.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg></div>
+          <h3>Verbali e riassunti</h3>
+          <p>Decisioni e cose da fare per il verbale di una riunione, domande e risposte per un'intervista, idee chiave per una lezione. Oppure un'email di riepilogo pronta da inviare.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+          <h3>Correggere e riascoltare</h3>
+          <p>Sistemi le parole, cambi chi parla, unisci o dividi le frasi. Salvando si aggiornano tutti i file.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg></div>
+          <h3>Non perdi mai il lavoro</h3>
+          <p>I lavori recenti sono nella schermata iniziale e le trascrizioni lunghe riprendono da dove si erano fermate.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg></div>
+          <h3>Cerca ovunque</h3>
+          <p>Trovi una parola o un nome in tutte le tue trascrizioni, con il minuto e chi l'ha detto.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5M12 16.5h.01"/></svg></div>
+          <h3>Fai domande alle registrazioni</h3>
+          <p>"Cosa si è deciso sul budget?" Una risposta breve con il minuto in cui se ne parla, scritta sul tuo PC.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 11v5M9.5 13.5L12 16l2.5-2.5"/></svg></div>
+          <h3>Cartella osservata</h3>
+          <p>Metti audio o video in una cartella che scegli tu e vengono trascritti da soli.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Tre passi</h2>
+      <p class="intro">Niente impostazioni da imparare. Homeword sceglie il modello giusto per il tuo PC.</p>
+      <div class="steps">
+        <div class="step"><h3>Trascina un file, o premi Registra</h3><p>MP3, WAV, M4A, MP4, MKV, MOV e molti altri.</p></div>
+        <div class="step"><h3>Scegli cosa ti serve</h3><p>Sottotitoli, testo o entrambi, e le lingue in cui tradurre.</p></div>
+        <div class="step"><h3>Ottieni i file</h3><p>Aprili, copiali o mostrali nella cartella. I lavori recenti restano nella schermata iniziale.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="gallery">
+        <figure>
+          <div class="frame"><picture><source srcset="../img/it-1-home-dark.png" media="(prefers-color-scheme: dark)"><img src="../img/it-1-home-light.png" width="2049" height="1152" loading="lazy" alt="Schermata iniziale con l'area per trascinare i file, il pulsante Registra, la ricerca e i lavori recenti"></picture></div>
+          <figcaption>Trascina audio o video, oppure registra. Ritrovi qui i lavori recenti e la cartella osservata.</figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><picture><source srcset="../img/it-5-search-dark.png" media="(prefers-color-scheme: dark)"><img src="../img/it-5-search-light.png" width="2049" height="1152" loading="lazy" alt="Risultati della ricerca di una parola in due trascrizioni, con il minuto e chi parla"></picture></div>
+          <figcaption>Cerca una parola in tutte le trascrizioni, con il minuto e chi parla.</figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><picture><source srcset="../img/it-6-ask-dark.png" media="(prefers-color-scheme: dark)"><img src="../img/it-6-ask-light.png" width="2049" height="1152" loading="lazy" alt="Domande su una riunione, con risposte che indicano il minuto"></picture></div>
+          <figcaption>Fai domande su una registrazione: la risposta indica il minuto.</figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><picture><source srcset="../img/it-4-recording-dark.png" media="(prefers-color-scheme: dark)"><img src="../img/it-4-recording-light.png" width="2049" height="1152" loading="lazy" alt="Schermata di registrazione con il testo in diretta"></picture></div>
+          <figcaption>Registra riunioni e chiamate, con il testo che compare in diretta.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy" id="privacy">
+    <div class="wrap two">
+      <div>
+        <h2>Privata per scelta</h2>
+        <p class="intro" style="margin-bottom:20px">Homeword non raccoglie dati personali. Niente account, niente pubblicità, niente statistiche, niente tracciamento.</p>
+        <p class="note">Leggi l'<a href="https://github.com/homewordapp/Homeword-Releases#privacy">informativa sulla privacy</a> completa (in inglese).</p>
+      </div>
+      <div>
+        <ul class="checks">
+          <li>Trascrizione, riconoscimento di chi parla, traduzione, riassunti e risposte funzionano sul tuo computer.</li>
+          <li>Registrazioni, trascrizioni e riassunti non vengono mai inviati a noi né a nessun altro.</li>
+          <li>Internet serve solo per scaricare i modelli la prima volta.</li>
+          <li>Google Traduttore è disponibile come opzione, spenta in partenza.</li>
+          <li>Il microfono si usa solo mentre registri, dopo che hai premuto Registra.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="requirements">
+    <div class="wrap">
+      <h2>Requisiti</h2>
+      <p class="intro">Funziona sulla maggior parte dei PC Windows. Una scheda grafica NVIDIA adatta lo rende molto più veloce, e Homeword la usa da solo.</p>
+      <div class="table-scroll">
+        <table class="req">
+          <tr><th></th><th>Minimo</th><th>Consigliato</th></tr>
+          <tr><td>Sistema</td><td>Windows 10 o 11, 64 bit</td><td>Windows 11</td></tr>
+          <tr><td>Memoria</td><td>4 GB</td><td>8 GB o più</td></tr>
+          <tr><td>Spazio su disco</td><td>circa 1 GB</td><td>3–5 GB per più modelli e la traduzione</td></tr>
+          <tr><td>Scheda grafica</td><td>non serve</td><td>NVIDIA GTX serie 10 o più recente, 4 GB</td></tr>
+          <tr><td>Internet</td><td colspan="2">solo la prima volta, per scaricare i modelli</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="wrap">
+      <h2 style="margin-bottom:24px">Domande frequenti</h2>
+      <details><summary>È davvero gratis?</summary><p>Sì. Niente account, niente abbonamento e niente pubblicità.</p></details>
+      <details><summary>Funziona senza internet?</summary><p>Sì, una volta scaricati i modelli. Ogni modello si scarica una volta sola, la prima volta che lo usi.</p></details>
+      <details><summary>Store o installer: quale scelgo?</summary><p>La versione del Microsoft Store si installa con un clic e la aggiorna lo Store. L'installer da GitHub si aggiorna da dentro l'app. È la stessa app.</p></details>
+      <details><summary>Quanto sono affidabili i riassunti?</summary><p>Li fa un piccolo modello di intelligenza artificiale sul tuo PC: bravo sui punti principali, ma può sbagliare un dettaglio. Controlla i dettagli importanti nella trascrizione.</p></details>
+      <details><summary>Avevo MediaScribe. È la stessa app?</summary><p>Sì. MediaScribe ora si chiama Homeword: stessa app, nome nuovo. MediaScribe si aggiorna da solo a Homeword e tiene impostazioni, lavori recenti e modelli scaricati.</p></details>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Prova Homeword</h2>
+      <p>Gratis per Windows. Le tue parole restano a casa.</p>
+      <div class="ctas">
+        <a class="btn btn-light" href="https://apps.microsoft.com/detail/9PH4PXP30PCT">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#f25022" d="M3 3h8.5v8.5H3z"/><path fill="#7fba00" d="M12.5 3H21v8.5h-8.5z"/><path fill="#00a4ef" d="M3 12.5h8.5V21H3z"/><path fill="#ffb900" d="M12.5 12.5H21V21h-8.5z"/></svg>
+          Scaricalo dal Microsoft Store
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/homewordapp/Homeword-Releases/releases/latest">Scarica l'installer</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Homeword · Prima si chiamava MediaScribe</div>
+    <nav>
+      <a href="https://github.com/homewordapp/Homeword-Releases#privacy">Privacy</a>
+      <a href="mailto:homeword.app@outlook.com">Contatti</a>
+      <a href="https://x.com/homewordapp">X</a>
+      <a href="https://www.instagram.com/homewordapp/">Instagram</a>
+      <a href="https://www.linkedin.com/company/homewordapp">LinkedIn</a>
+      <a href="https://www.youtube.com/@homewordapp">YouTube</a>
+      <a href="https://github.com/homewordapp/Homeword-Releases">GitHub</a>
+      <a href="../" lang="en" hreflang="en">English</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
